@@ -3,6 +3,7 @@
   <Description>These are default test settings for a local test run.</Description>
   <Deployment>
     <DeploymentItem filename="packages\Selenium.InternetExplorer.WebDriver.3.11.1\driver\IEDriverServer.exe" />
+    <DeploymentItem filename="SampleTestMix\MicrosoftWebDriver.exe" />
     <DeploymentItem filename="packages\Selenium.Firefox.WebDriver.0.20.0\driver\geckodriver.exe" />
     <DeploymentItem filename="packages\Selenium.Chrome.WebDriver.2.38\driver\chromedriver.exe" />
   </Deployment>
