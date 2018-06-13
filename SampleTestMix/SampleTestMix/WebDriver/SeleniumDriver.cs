@@ -59,7 +59,7 @@ namespace SampleTestMix.WebDriver
                     break;
 
                 case "chrome":
-                    ChromeOptions chromeoptions = new ChromeOptions();
+                    defaultLabel: ChromeOptions chromeoptions = new ChromeOptions();
                     chromeoptions.AddArguments(new List<string>() { "no-sandbox", "test-type", "--disable-extensions", "disable-infobars" });
                     _seleniumWebDriver = new ChromeDriver(deploymentDirectory, chromeoptions);
                     _seleniumWebDriver.Manage().Window.Maximize();
@@ -106,6 +106,9 @@ namespace SampleTestMix.WebDriver
                     edgeOptions.PageLoadStrategy = PageLoadStrategy.Eager;
                     _seleniumWebDriver = new EdgeDriver(deploymentDirectory, edgeOptions);
                     break;
+
+                default:
+                    goto defaultLabel;
             }
 
             _seleniumWebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
