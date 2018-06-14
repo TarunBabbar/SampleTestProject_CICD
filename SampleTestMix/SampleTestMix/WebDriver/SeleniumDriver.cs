@@ -101,7 +101,7 @@ namespace SampleTestMix.WebDriver
                     break;
 
                 case "edge":
-                    EdgeDriverService driverService = EdgeDriverService.CreateDefaultService(deploymentDirectory, "MicrosoftWebDriver.exe");
+                    EdgeDriverService driverService = EdgeDriverService.CreateDefaultService(deploymentDirectory, "MicrosoftWebDriver.exe", 50269);
                     EdgeOptions edgeOptions = new EdgeOptions()
                     {
                         PageLoadStrategy = PageLoadStrategy.Eager
