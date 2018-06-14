@@ -3,6 +3,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
+using OpenQA.Selenium.Remote;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -100,18 +101,21 @@ namespace SampleTestMix.WebDriver
                     break;
 
                 case "edge":
-                    EdgeOptions edgeOptions = new EdgeOptions();
-                    edgeOptions.AddAdditionalCapability("BrowserName", "MicrosoftEdge");
-                    edgeOptions.AddAdditionalCapability("SetPlatform", Platform.CurrentPlatform);
-                    edgeOptions.PageLoadStrategy = PageLoadStrategy.Eager;
-                    _seleniumWebDriver = new EdgeDriver(deploymentDirectory, edgeOptions);
+                    EdgeDriverService driverService = EdgeDriverService.CreateDefaultService(deploymentDirectory, "MicrosoftWebDriver.exe");
+                    EdgeOptions edgeOptions = new EdgeOptions()
+                    {
+                        PageLoadStrategy = PageLoadStrategy.Eager
+                    };
+
+                    _seleniumWebDriver = new EdgeDriver(driverService, edgeOptions);
                     break;
 
                 default:
                     goto defaultLabel;
             }
 
-            _seleniumWebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
+            _seleniumWebDriver.Manage().Cookies.DeleteAllCookies();
+            _seleniumWebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(60);
         }
     }
 }

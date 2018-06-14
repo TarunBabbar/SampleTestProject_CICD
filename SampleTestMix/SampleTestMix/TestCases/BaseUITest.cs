@@ -13,7 +13,7 @@ namespace SampleTestMix.TestCases
     [TestClass]
    public abstract class BaseUITest
     {
-        private IWebDriver seleniumDriver;
+        private static IWebDriver seleniumDriver;
         private TestContext testContextInstance;
 
 
@@ -23,7 +23,13 @@ namespace SampleTestMix.TestCases
             Driver.Instance.InitializeWebBrowser(context.DeploymentDirectory);
         }
 
-        protected IWebDriver SeleniumDriver
+        [AssemblyCleanup]
+        public static void AssemblyCleanUp()
+        {
+            SeleniumDriver.Quit();
+        }
+
+        protected static IWebDriver SeleniumDriver
         {
             get
             {
