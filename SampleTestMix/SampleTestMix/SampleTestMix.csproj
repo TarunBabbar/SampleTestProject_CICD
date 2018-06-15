@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MicrosoftWebDriver.exe" />
+    <Content Include="MicrosoftWebDriver_old.exe" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
