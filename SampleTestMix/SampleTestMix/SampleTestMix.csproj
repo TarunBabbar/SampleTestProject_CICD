@@ -72,6 +72,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Driver\LocalExecution\MicrosoftWebDriver.exe" />
+    <Content Include="Driver\RemoteExecution\MicrosoftWebDriver.exe" />
     <Content Include="MicrosoftWebDriver.exe" />
     <Content Include="MicrosoftWebDriver_old.exe" />
   </ItemGroup>
