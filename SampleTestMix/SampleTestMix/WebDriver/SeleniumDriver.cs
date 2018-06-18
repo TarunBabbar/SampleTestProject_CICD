@@ -108,6 +108,7 @@ namespace SampleTestMix.WebDriver
                     };
 
                     _seleniumWebDriver = new EdgeDriver(driverService, edgeOptions);
+                    _seleniumWebDriver.Manage().Window.Maximize();
                     break;
 
                 default:
