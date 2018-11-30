@@ -23,6 +23,15 @@ namespace SampleTestMix.TestCases
             TestContext.WriteLine("Ended Test");
         }
 
+        [TestMethod, TestCategory("Failed-UnitTest")]
+        public void VerifyFailingOfAdditionOfTwoString()
+        {
+            TestContext.WriteLine("Started Test");
+            ("Invoice" + "Smash").Should().Be("Invoice");
+            TestContext.WriteLine("Ended Test");
+        }
+
+        
         [TestMethod, TestCategory("UnitTest")]
         public void VerifyAdditionOfTwoNumbers()
         {
