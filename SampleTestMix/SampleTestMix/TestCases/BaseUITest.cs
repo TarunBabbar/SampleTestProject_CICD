@@ -11,16 +11,17 @@ using Driver = SampleTestMix.WebDriver.SeleniumDriver;
 namespace SampleTestMix.TestCases
 {
     [TestClass]
-   public abstract class BaseUITest
+    public abstract class BaseUITest
     {
         private static IWebDriver seleniumDriver;
-        private TestContext testContextInstance;
+        private static TestContext testContextInstance;
 
 
         [AssemblyInitialize]
         public static void AssemblySetUp(TestContext context)
         {
             Driver.Instance.InitializeWebBrowser(context.DeploymentDirectory);
+            testContextInstance = context;
         }
 
         [AssemblyCleanup]
@@ -47,6 +48,12 @@ namespace SampleTestMix.TestCases
             set { testContextInstance = value; }
         }
 
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            TestContext = testContextInstance;
+        }
         [TestCleanup]
         public void TestCleanUp()
         {
@@ -57,6 +64,31 @@ namespace SampleTestMix.TestCases
             ((ITakesScreenshot)SeleniumDriver).GetScreenshot().SaveAsFile(name, ScreenshotImageFormat.Png);
             TestContext.AddResultFile(name);
             //}
+
+            if (TestContext.CurrentTestOutcome == UnitTestOutcome.Failed)
+            {
+                var type = Type.GetType(TestContext.FullyQualifiedTestClassName);
+                if (type != null)
+                {
+                    var instance = Activator.CreateInstance(type);
+                    var method = type.GetMethod(TestContext.TestName);
+                    //int retries = 2;
+                    //while (true)
+                    //{
+                        try
+                        {
+                            method.Invoke(instance, null);
+                        }
+                        catch
+                        {
+                            //if (--retries == 0)
+                            throw;
+                            //else System.Threading.Thread.Sleep(1000);
+                        }
+                    //}
+                }
+            }
+
         }
     }
 }
